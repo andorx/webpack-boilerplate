@@ -29,8 +29,9 @@ module.exports = function(PATHS, options) {
     module: {
       loaders: [
         {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css', 'sass'),
+          test: /\.scss$/,
+          // https://github.com/webpack/extract-text-webpack-plugin/issues/209
+          loader: ExtractTextPlugin.extract('style', 'css!sass'),
           include: PATHS.style
         }
       ]
@@ -53,7 +54,7 @@ module.exports = function(PATHS, options) {
         info: true,
         basePath: process.cwd(),
         paths: [PATHS.app]
-      }),
+      })
     ]
   };
 };
