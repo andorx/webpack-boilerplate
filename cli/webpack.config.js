@@ -20,7 +20,8 @@ const options = {
 };
 
 const env = process.env.NODE_ENV || 'development';
-const envConfig = require(path.join(__dirname, '../', './cli/config', env))(PATHS, options);
+const envConfig =
+  require(path.join(__dirname, '../', './cli/config', env))(PATHS, options);
 
 var common = {
   context: PATHS.app,
@@ -31,13 +32,17 @@ var common = {
     style: PATHS.style
   },
 
-  // resolve: {
-  //   extensions: ['', '.js', '.jsx', '.json', '.scss', '.html'],
-  //   alias: {
-  //     $root: path.join(__dirname, PATHS.app)
-  //   }
-  // },
+  // Common loaders
   module: {
+    //  ESLint
+    preLoaders: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules)/,
+        include: PATHS.app,
+        loader: 'eslint-loader'
+      }
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
@@ -56,15 +61,14 @@ var common = {
     publicPath: '/'
   },
 
+  // Common plugins
   plugins: [
     // Inject bundle file to template
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: PATHS.index,
       inject: 'body',
-      xhtml: true,
-      // Skip some chunks
-      excludeChunks: []
+      xhtml: true
     }),
 
     new webpack.DefinePlugin({
@@ -75,6 +79,4 @@ var common = {
   ]
 };
 
-module.exports = validate(merge.smart(common, envConfig), {
-  // Validation rules
-});
+module.exports = validate(merge.smart(common, envConfig), {});
