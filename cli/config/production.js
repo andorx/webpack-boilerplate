@@ -4,25 +4,18 @@ const PurifyCSSPlugin = require('purifycss-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function(PATHS, options) {
+  const pkg = require(PATHS.package);
+
   return {
     devtool: 'source-map',
 
+    // Append vendor to entry chunks
     entry: {
-      'vendor': [
-        'react',
-        'react-dom',
-        'react-router',
-        'react-redux',
-        'redux',
-        'redux-thunk',
-        'isomorphic-fetch',
-        'lodash',
-        'material-design-lite'
-      ]
+      vendor: Object.keys(pkg.dependencies)
     },
 
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].[chunkhash:6].js',
       chunkFilename: '[chunkhash].js'
     },
 

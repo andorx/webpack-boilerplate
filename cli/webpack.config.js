@@ -11,7 +11,8 @@ const PATHS = {
   style: [
     path.join(__dirname, '../', 'app', 'app.scss')
   ],
-  build: path.join(__dirname, '../', 'build')
+  build: path.join(__dirname, '../', 'build'),
+  package: path.join(__dirname, '../', 'package.json')
 };
 
 const options = {
@@ -27,9 +28,16 @@ var common = {
   context: PATHS.app,
 
   // Each key will be generated into individual chunk
+  // entry chunks
   entry: {
     app: PATHS.app,
     style: PATHS.style
+  },
+
+  output: {
+    path: PATHS.build,
+    // specify the public URL address of the output files in HTML
+    publicPath: '/'
   },
 
   // Common loaders
@@ -53,12 +61,6 @@ var common = {
         }
       }
     ]
-  },
-
-  output: {
-    path: PATHS.build,
-    filename: '[name].js',
-    publicPath: '/'
   },
 
   // Common plugins
