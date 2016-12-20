@@ -59,6 +59,10 @@ var common = {
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.html$/,
+        loader: 'html'
       }
     ]
   },
@@ -68,7 +72,7 @@ var common = {
     // Inject bundle file to template
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: PATHS.index,
+      template: '!!html!' + PATHS.index,
       inject: 'body',
       xhtml: true
     }),
