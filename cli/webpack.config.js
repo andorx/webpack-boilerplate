@@ -6,13 +6,13 @@ const validate = require('webpack-validator');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
-  app: path.join(__dirname, '../', 'app'),
-  index: path.join(__dirname, '../', 'app', 'index.html'),
+  app: path.join(__dirname, '..', 'app'),
+  index: path.join(__dirname, '..', 'app', 'index.html'),
   style: [
-    path.join(__dirname, '../', 'app', 'app.scss')
+    path.join(__dirname, '..', 'app', 'styles', 'app.scss')
   ],
-  build: path.join(__dirname, '../', 'build'),
-  package: path.join(__dirname, '../', 'package.json')
+  build: path.join(__dirname, '..', 'build'),
+  package: path.join(__dirname, '..', 'package.json')
 };
 
 const options = {
@@ -35,9 +35,12 @@ var common = {
   },
 
   output: {
-    path: PATHS.build,
-    // specify the public URL address of the output files in HTML
-    publicPath: '/'
+    filename: '[name].[hash].js',
+    path: PATHS.build
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   },
 
   // Common loaders
@@ -45,7 +48,7 @@ var common = {
     //  ESLint
     preLoaders: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?$/,
         exclude: /(node_modules)/,
         include: PATHS.app,
         loader: 'eslint-loader'
@@ -67,9 +70,9 @@ var common = {
   plugins: [
     // Inject bundle file to template
     new HtmlWebpackPlugin({
-      filename: 'index.html',
       template: PATHS.index,
       inject: 'body',
+      filename: 'index.html',
       xhtml: true
     }),
 

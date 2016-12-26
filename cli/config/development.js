@@ -14,6 +14,10 @@ module.exports = function(PATHS, options) {
       ]
     },
 
+    output: {
+      filename: '[name].[hash].js'
+    },
+
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000
