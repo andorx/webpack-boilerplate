@@ -1,9 +1,8 @@
 import ReactDOM from 'react-dom';
-import MDL from 'material-design-lite';
 import React from 'react';
-import HelloComponent from './component';
+import HelloComponent from './components/hello.jsx';
 
 ReactDOM.render(
   <HelloComponent />,
-  document.getElementById('body')
+  document.getElementById('app')
 );
