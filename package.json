@@ -75,11 +75,12 @@
     "webpack-validator": "^2.2.7"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.5",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
-    "react-router": "^2.8.1",
+    "react-router": "^3.0.0",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
   }
